@@ -55,6 +55,6 @@ I sort of botched the bowerfile (or lack thereof, so I was forced to compress th
  
 License
 -------
-The MIT License (MIT)
+Distributed under the MIT License (MIT)
 
 Copyright (c) 2015 Andy Liang
