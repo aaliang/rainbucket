@@ -1,0 +1,103 @@
+.bar {
+  fill: DarkOliveGreen;
+}
+
+.bar:hover {
+  fill: black;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+div.tooltip {
+  position: absolute;
+  padding: 10px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.chart {
+  pointer-events: all;
+}
+
+
+path {
+    stroke: steelblue;
+    stroke-width: 1;
+    stroke-opacity: 0.40;
+    fill: none;
+}
+
+path:hover {
+    stroke-opacity: 0.80;
+}
+
+path:hover + text {
+ display: block
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.dp {
+  visibility: hidden;
+}
+
+.viz-line-1 {
+  stroke: SteelBlue !important;
+}
+
+.viz-line-2 {
+  stroke: Salmon !important;
+}
+
+.viz-line-3 {
+  stroke: SeaGreen !important;
+}
+
+.viz-line-4 {
+  stroke: Coral !important;
+}
+
+.viz-line-5 {
+  stroke: LightGreen !important;
+}
+
+.viz-line-6 {
+  stroke: MediumOrchid !important;
+}
+
+.viz-line-7 {
+  stroke: Gold !important;
+}
+
+.viz-line-8 {
+  stroke: Red !important;
+}
+
+.line-name {
+  display: none;
+
+
+}
+
+.highlighted {
+  color: Green;
+}
