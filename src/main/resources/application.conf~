@@ -1,0 +1,9 @@
+db.jdbc_url = "jdbc:postgresql://postgres-mini-01.cmosts5w9mo4.us-west-2.rds.amazonaws.com/hivemind"
+db.username = "layer3"
+db.password = "layer3ironman"
+db.driver = "org.postgresql.Driver"
+
+twitter4j.oauth.consumerKey = "te5U9n3vIdRIynwcBw3KVCick"
+twitter4j.oauth.consumerSecret = "G2wMKpfLCa1ck23p7pMxVKcan5w3yVOk06tcSJx6oAuwIZdWIQ"
+twitter4j.oauth.accessToken = "30759045-99XXMNCVuBqnRSDIHsjFLTpYuOb3k3MeLXQ4HKdM1"
+twitter4j.oauth.accessTokenSecret = "PwXWc9B0c5UiTpRzf0TO8xmYRzQLFiTWoGeGbWACxQLXK"

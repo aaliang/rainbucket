@@ -1,0 +1,35 @@
+#page {
+	margin-top: 80px;
+}
+
+.i-hate-bootstrap {
+	width: 1400px !important;
+}
+
+.chart {
+	display: block;
+  margin: 0 auto;
+}
+
+.hash-tag-div {
+  display: inline-block;
+  width: 240px;
+}
+
+.range-input {
+  text-align: center;
+}
+
+.hint {
+  font-size: 8pt;
+  color: #ccc;
+}
+
+
+.ht-controls {
+  height: 30px;
+}
+
+.ht-check-controls {
+  margin-left: 30px;
+}

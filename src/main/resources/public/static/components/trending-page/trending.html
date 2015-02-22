@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div id="trending-div">
+    <svg class="chart"></svg>
+  </div>
+  <div>
+      <div>
+          <span>
+              timerange:
+              <input class='range-input' data-bind="value: timeStart" />
+              -
+              <input class='range-input' data-bind="value: timeEnd" />
+              <button class="btn btn-primary" data-bind="click: submitRange">update range</button>
+              <button class="btn btn-primary" data-bind="click: resetRange">reset</button>
+              <button class="btn btn-success" data-bind="click: softUpdate">update</button>
+              <button class="btn btn-success" data-bind="click: hardUpdate">hard update</button>
+              <input data-bind="value: scratch" /> <!-- temporarily captures the time when hovered -->
+          </span>
+      </div>
+      <div>interval (seconds): <input class='range-input' data-bind="value: interval" /><span class="hint"> (multiples of 20 for higher accuracy)</span></div>
+    </div>
+
+    <div class = "ht-controls">
+      <span class="ht-radio">
+          Auto-update chart when hashtag is selected:
+          <input type="radio" name="checkOnUpdate" value="true" checked="checked" data-bind="click: toggleCheckBoxUpdate" /> yes
+          <input type="radio" name="checkOnUpdate" value="false" data-bind="click: toggleCheckBoxUpdate" /> no
+      </span>
+
+        <span class="ht-check-controls">
+            <button class="btn btn-default btn-xs" data-bind="click: uncheckall">uncheck all</button>
+            <button class="btn btn-default btn-xs" data-bind="click: checkall">check all</button>
+        </span>
+    </div>
+
+  <!-- ko foreach: hashTags -->
+    <div class="hash-tag-div">
+        <input type="checkbox" data-bind="checkedValue: $data, checked: $parent.checkedHashTags, attr: { id: 'hashtag_' + $index() }" />
+        <label data-bind="text: $data, attr: { for: 'hashtag_' + $index() }"></label>
+    </div>
+  <!-- /ko -->
+
+</div>
