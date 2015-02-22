@@ -11,6 +11,8 @@ intervals' and so on.
 
 Additionally there's a html app that will graph the results to easily visualize any trends.
 
+![Alt text](https://github.com/aaliang/rainbucket/blob/master/screenshot.png "screenshot")
+
 Requirements:
 -------------
 sbt
