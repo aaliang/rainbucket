@@ -2,7 +2,7 @@ define(["knockout", "hasher", "text!./trending.html"], function(ko, hasher, anal
 
   function setHashSilently (hash) {
     hasher.changed.active = false;
-    hasher.setHash(hash.substring(1));
+    hasher.setHash(hash);
     hasher.changed.active = true;
   }
 
