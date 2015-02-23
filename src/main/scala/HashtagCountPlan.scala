@@ -83,14 +83,14 @@ object HashtagCountPlan extends future.Plan with ServerErrorResponse {
       Future.successful(ResponseString(scala.io.Source.fromFile(getClass.getResource("public/index.html").getFile).mkString))
     }
 
-    //this is really here for debugging. resources are placed into the target directory at compile time...
-    case req @ GET(Path(Seg("static" :: pathParts))) => {
-      import java.io._
+    // //this is really here for debugging. resources are placed into the target directory at compile time...
+    // case req @ GET(Path(Seg("static" :: pathParts))) => {
+    //   import java.io._
 
-      val path = new File(".").getAbsolutePath() + "/src/main/resources/public/static/" + pathParts.mkString("/")
+    //   val path = new File(".").getAbsolutePath() + "/src/main/resources/public/static/" + pathParts.mkString("/")
 
-      Future.successful(ResponseString(scala.io.Source.fromFile(path).mkString))
-    }
+    //   Future.successful(ResponseString(scala.io.Source.fromFile(path).mkString))
+    // }
 
   }
 

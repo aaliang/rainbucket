@@ -11,6 +11,15 @@
   margin: 0 auto;
 }
 
+.trending-controls {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sub-controls {
+  margin: 8px auto;
+}
+
 .hash-tag-div {
   display: inline-block;
   width: 240px;
@@ -32,4 +41,19 @@
 
 .ht-check-controls {
   margin-left: 30px;
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+.loading-rotate {
+    -webkit-animation-name:             rotate;
+    -webkit-animation-duration:         1.2s;
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-transition-animation-function: linear;
 }

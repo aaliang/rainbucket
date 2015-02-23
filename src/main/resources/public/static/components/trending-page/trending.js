@@ -2,7 +2,7 @@ define(["knockout", "hasher", "text!./trending.html"], function(ko, hasher, anal
 
   function setHashSilently (hash) {
     hasher.changed.active = false;
-    hasher.setHash(hash.substring(1));
+    hasher.setHash(hash);
     hasher.changed.active = true;
   }
 
@@ -46,6 +46,8 @@ define(["knockout", "hasher", "text!./trending.html"], function(ko, hasher, anal
     self.hashTags = ko.observableArray([]);
 
     self.checkedHashTags = ko.observableArray(initialArray);
+
+    self.isLoading = ko.observable(true);
 
     self.suggestedWidth = document.getElementById("trending-div").offsetWidth - 40*2;
 
@@ -95,49 +97,51 @@ define(["knockout", "hasher", "text!./trending.html"], function(ko, hasher, anal
 
     var refreshChart = function () {
 
+      self.isLoading(true);
+
       Array.prototype.forEach.call(document.getElementsByClassName('chart'), function (e) {
         e.innerHTML = ""
       });
 
       vizlib.makeLineChart(
-                           self.dataGetter,
-                           {margin: {top: 20, right: 30, bottom: 30, left: 40}, suggestedWidth: self.suggestedWidth},
-                           self.interval(),
-                           self.checkedHashTags(),
-                           +self.timeStart(),
-                           +self.timeEnd(),
-                           self.scratch,
-                           self.dataCache,
-                           function (keys, timerange, cache) {
+       self.dataGetter,
+       {margin: {top: 20, right: 30, bottom: 30, left: 40}, suggestedWidth: self.suggestedWidth},
+       self.interval(),
+       self.checkedHashTags(),
+       +self.timeStart(),
+       +self.timeEnd(),
+       self.scratch,
+       self.dataCache,
+       function (keys, timerange, cache) {
 
-                             var startTimeActual = timerange[0].getTime(),
-                                 endTimeActual = timerange[1].getTime();
+         var startTimeActual = timerange[0].getTime(),
+             endTimeActual = timerange[1].getTime();
 
-                             self.timeStart(timerange[0].getTime());
-                             self.timeEnd(timerange[1].getTime());
-                             self.dataCache = cache;
+         self.timeStart(timerange[0].getTime());
+         self.timeEnd(timerange[1].getTime());
+         self.dataCache = cache;
+         self.isLoading(false);
+
+         //add the hashtags so we can reflect the checkboxes on the ui. yeah i should probably
+         //change the response struct
+         var cindex = cache.length,
+             hts = {};
+         while (cindex--) {
+           if (cache[cindex].timestamp >= startTimeActual && cache[cindex].timestamp <= endTimeActual) {
+
+             for (var key in cache[cindex]) {
+               if (key !== 'timestamp') {
+                 hts[key] = true;
+               }
+             }
+
+           }
+         }
+
+         self.hashTags(Object.keys(hts).sort());
 
 
-                             //add the hashtags so we can reflect the checkboxes on the ui. yeah i should probably
-                             //change the response struct
-                             var cindex = cache.length,
-                                 hts = {};
-                             while (cindex--) {
-                               if (cache[cindex].timestamp >= startTimeActual && cache[cindex].timestamp <= endTimeActual) {
-
-                                 for (var key in cache[cindex]) {
-                                   if (key !== 'timestamp') {
-                                     hts[key] = true;
-                                   }
-                                 }
-
-                               }
-                             }
-
-                             self.hashTags(Object.keys(hts).sort());
-
-
-                           });
+       });
     };
 
     var isCheckedUpdate = true;
