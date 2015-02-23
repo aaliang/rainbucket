@@ -11,9 +11,17 @@ define(["knockout", "hasher", "text!./trending.html"], function(ko, hasher, anal
 
     var self = this;
 
+    var defaultStartGetter = function () {
+      return Date.now() - (1000*60*60*6); //6 hours ago
+    }
+
+    var timestampToHumanDate = function (ts) {
+      return new Date(ts);
+    }
+
     // here are some defaults.
     var initialArray = [],
-        initialStart = undefined,
+        initialStart = defaultStartGetter(), //6 hours ago
         initialInterval = 120; //120 seconds
 
     // parse any query parameters
@@ -35,13 +43,11 @@ define(["knockout", "hasher", "text!./trending.html"], function(ko, hasher, anal
 
     self.dataCache = null;
 
-    self.timeStart = ko.observable(initialStart);
+    self.timeStart = ko.observable(timestampToHumanDate(initialStart));
 
     self.timeEnd = ko.observable();
 
     self.interval = ko.observable(initialInterval);
-
-    self.scratch = ko.observable();
 
     self.hashTags = ko.observableArray([]);
 
@@ -60,21 +66,14 @@ define(["knockout", "hasher", "text!./trending.html"], function(ko, hasher, anal
       self.checkedHashTags(self.hashTags());
     }
 
-    self.submitRange = function () {
-      self.updateUrl();
-      refreshChart();
-    };
-
     self.resetRange = function () {
-      self.timeStart(null);
+      self.timeStart(timestampToHumanDate(defaultStartGetter()));
       self.timeEnd(null);
-      self.updateUrl();
       refreshChart();
     };
 
     self.hardUpdate = function () {
       self.dataCache = null;
-      self.updateUrl();
       refreshChart();
     }
 
@@ -87,38 +86,43 @@ define(["knockout", "hasher", "text!./trending.html"], function(ko, hasher, anal
         return e.substring(1);
       }).join(',');
 
-      setHashSilently(document.location.hash.split('?')[0] +
-        '?ids=' + ids +
-        '&start=' + self.timeStart() +
-        '&interval=' + self.interval()
-        );
+      var newHash = document.location.hash.split('?')[0] +
+                        '?ids=' + ids +
+                        '&interval=' + self.interval() +
+                        '&start=' + Date.parse(self.timeStart());
 
-    }
+      var end = self.timeEnd();
+
+      if (end) {
+        newHash += Date.parse(end);
+      }
+
+      setHashSilently(newHash);
+    };
 
     var refreshChart = function () {
+      self.updateUrl(); //triggers an update from the
 
       self.isLoading(true);
 
-      Array.prototype.forEach.call(document.getElementsByClassName('chart'), function (e) {
-        e.innerHTML = ""
-      });
+      var end = self.timeEnd();
+      if (end) {
+        end = Date.parse(end)
+      }
 
       vizlib.makeLineChart(
        self.dataGetter,
        {margin: {top: 20, right: 30, bottom: 30, left: 40}, suggestedWidth: self.suggestedWidth},
        self.interval(),
        self.checkedHashTags(),
-       +self.timeStart(),
-       +self.timeEnd(),
-       self.scratch,
+       +Date.parse(self.timeStart()),
+       end,
        self.dataCache,
        function (keys, timerange, cache) {
 
          var startTimeActual = timerange[0].getTime(),
              endTimeActual = timerange[1].getTime();
 
-         self.timeStart(timerange[0].getTime());
-         self.timeEnd(timerange[1].getTime());
          self.dataCache = cache;
          self.isLoading(false);
 
@@ -169,14 +173,17 @@ define(["knockout", "hasher", "text!./trending.html"], function(ko, hasher, anal
 
       var args = {
         url: "/hashtag_counts",
-        data: {interval: self.interval()},
+        data: {
+          interval: self.interval(),
+          start: Date.parse(self.timeStart())
+        },
         method: "GET"
       };
 
-      var timeStart = self.timeStart();
+      var end = self.timeEnd();
 
-      if (timeStart) {
-        args.data.start = timeStart
+      if (end) {
+        args.data.end = Date.parse(end);
       }
 
       $.ajax(args).done(function (res) {

@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <div id="trending-div">
         <svg class="chart"></svg>
+        <div class="trending-tooltip tooltip"></div>
     </div>
     <div class="trending-controls">
         <div>
@@ -9,12 +10,10 @@
                   timerange:
                   <input class='range-input' data-bind="value: timeStart" />
                   -
-                  <input class='range-input' data-bind="value: timeEnd" />
-                  <button class="btn btn-primary" data-bind="click: submitRange">update range</button>
+                  <input class='range-input' placeholder="now" data-bind="value: timeEnd" />
                   <button class="btn btn-primary" data-bind="click: resetRange">reset</button>
                   <button class="btn btn-success" data-bind="click: softUpdate">update</button>
                   <button class="btn btn-success" data-bind="click: hardUpdate">hard update <span id="loading" class="glyphicon glyphicon-refresh" data-bind="css: { 'loading-rotate': isLoading() }" aria-hidden="true"></span></button>
-                  <input data-bind="value: scratch" /> <!-- temporarily captures the time when hovered -->
                 </span>
           </div>
           <div class="sub-controls">interval (seconds): <input class='range-input' data-bind="value: interval" /><span class="hint"> (multiples of 20 for higher accuracy)</span></div>
