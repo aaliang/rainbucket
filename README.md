@@ -11,6 +11,8 @@ intervals' and so on.
 
 Additionally there's a html app that will graph the results to easily visualize any trends.
 
+![Alt text](https://github.com/aaliang/rainbucket/blob/master/screenshot.png "screenshot")
+
 Requirements:
 -------------
 sbt
@@ -51,5 +53,8 @@ I sort of botched the bowerfile (or lack thereof, so I was forced to compress th
 3) the app UI is hosted on the API server at the root directory on default port 8080 e.g. it should be accessible via localhost:8080
   by default it has a interval of 60 seconds and will get everything between now and 6 hours ago
  
+License
+-------
+Distributed under the MIT License (MIT)
 
-
+Copyright (c) 2015 Andy Liang
