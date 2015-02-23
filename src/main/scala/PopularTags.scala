@@ -88,7 +88,7 @@ object PopularTags {
     // Print popular hashtags
     topCounts20.foreachRDD((rdd, time) => {
       val topList = rdd.collect
-      println("\nPopular topics in last 10 seconds (%s total):".format(rdd.count()))
+      println("\nPopular topics in last 20 seconds (%s total):".format(rdd.count()))
       topList.foreach{case (count, tag) => println("%s (%s tweets)".format(tag, count))}
 
       outtie(time, topList, hashTagsToIds)
