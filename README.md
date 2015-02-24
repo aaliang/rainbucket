@@ -1,9 +1,9 @@
 # Rainbucket
 Twitter trending hashtags tool
 
-This counts trending hashtags pulled from the public Twitter API over a configurable interval.
-Hashtag counts are stored in PostgreSQL, although the collector code can also be modified to output
-to CSV relatively easy.
+This counts trending hashtags pulled from the public Twitter API over a configurable interval. Tweets
+are collected and processed in real time. Hashtag counts are stored in PostgreSQL, although the collector
+code can also be modified to output to CSV relatively easy.
 
 Also included is an API server that will fetch the counts over intervals. E.g: 'get me the counts of
 all the hashtags i've been collecting between last friday at 5pm and today, broken down over 40 second
