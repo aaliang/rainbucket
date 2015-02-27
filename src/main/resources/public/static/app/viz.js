@@ -72,7 +72,6 @@ var vizlib = new (function () {
          e.innerHTML = ""
        });
 
-
         var svg = d3.select(".chart")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -183,19 +182,14 @@ var vizlib = new (function () {
             .on("mouseout", function() { focus.style("display", "none"); })
             .on("mousemove", mousemove);
 
-
         callback(Object.keys(_data[0]).filter(function (e)  {return e !== 'timestamp'}), x.domain(), _data);
-
       }
-
 
       if (cached) {
         dataWorker(null, cached);
       } else {
-
         dataGetter(dataWorker)
       }
-
     };
 
   }

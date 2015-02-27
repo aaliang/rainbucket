@@ -7,8 +7,6 @@ define(["knockout", "hasher", "text!./trending.html"], function(ko, hasher, anal
   }
 
   function TrendingViewModel(route) {
-    tellerum.vm.trendingViewModel = this;
-
     var self = this;
 
     var defaultStartGetter = function () {
@@ -138,13 +136,9 @@ define(["knockout", "hasher", "text!./trending.html"], function(ko, hasher, anal
                  hts[key] = true;
                }
              }
-
            }
          }
-
          self.hashTags(Object.keys(hts).sort());
-
-
        });
     };
 
@@ -190,11 +184,8 @@ define(["knockout", "hasher", "text!./trending.html"], function(ko, hasher, anal
         callback(null, res)
       })
     }
-
     self.softUpdate = refreshChart
-
     self.hardUpdate();
-
   }
 
   return { viewModel: TrendingViewModel, template: analyticsTemplate };
