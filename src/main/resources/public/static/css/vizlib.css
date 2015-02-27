@@ -29,6 +29,8 @@ div.tooltip {
   border: 0px;
   border-radius: 8px;
   pointer-events: none;
+  opacity: 0.50;
+  stroke-opacity:0.50;
 }
 
 .chart {

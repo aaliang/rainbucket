@@ -22,7 +22,14 @@
 
 .hash-tag-div {
   display: inline-block;
-  width: 240px;
+  width: 260px;
+}
+
+.hash-tags {
+  -moz-column-width: 260px;
+  -webkit-column-width: 260px;
+  column-width: 260px;
+  text-align: left;
 }
 
 .range-input {

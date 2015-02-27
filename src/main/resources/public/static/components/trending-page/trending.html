@@ -32,11 +32,11 @@
             </span>
         </div>
 
-      <!-- ko foreach: hashTags -->
+      <div class="hash-tags" data-bind="foreach: hashTags">
         <div class="hash-tag-div">
             <input type="checkbox" data-bind="checkedValue: $data, checked: $parent.checkedHashTags, attr: { id: 'hashtag_' + $index() }" />
             <label data-bind="text: $data, attr: { for: 'hashtag_' + $index() }"></label>
         </div>
-      <!-- /ko -->
+      </div>
     </div>
 </div>
